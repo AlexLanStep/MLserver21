@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31808.319
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MLserver2.1", "MLserver2.1\MLserver2.1.csproj", "{7A364F84-3994-404B-9D51-49B25D9E7133}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MLserver2.1", "MLserver2.1\MLserver2.1.csproj", "{7A364F84-3994-404B-9D51-49B25D9E7133}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestJson01", "TestJson01\TestJson01.csproj", "{858901E7-3970-4B51-BF12-3E1EFDEF503A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{7A364F84-3994-404B-9D51-49B25D9E7133}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A364F84-3994-404B-9D51-49B25D9E7133}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A364F84-3994-404B-9D51-49B25D9E7133}.Release|Any CPU.Build.0 = Release|Any CPU
+		{858901E7-3970-4B51-BF12-3E1EFDEF503A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{858901E7-3970-4B51-BF12-3E1EFDEF503A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{858901E7-3970-4B51-BF12-3E1EFDEF503A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{858901E7-3970-4B51-BF12-3E1EFDEF503A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TestJson01": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\LOGs\\Vector_GL3200\\#COMMON\\Dll\\convert.exe\"  \"E:\\MLserver\\data\\TT05SED\\log\\2021-10-30_18-25-49\"  ~test "
+    }
+  }
+}
