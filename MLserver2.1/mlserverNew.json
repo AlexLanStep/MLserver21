@@ -1,0 +1,29 @@
+{
+  "clexport": {
+    "MDF": {
+      "commanda": " -v -o -t -l \"file_clf\" -MB -O  \"my_dir\"   \"SystemChannel=Binlog_GL.ini\"",
+      "ext": "mdf"
+    }
+  },
+
+  "error": [ "error 0", "error 1", "error 2", "error 3", "error 4", "error 5" ],
+
+  "lrf_dec": " -S 20 -L 512 -n -k -v -i ",
+
+  "pool": 10,
+
+  "timewait": 20,
+
+  "car name": {
+    "TT05SED": {
+      "clexport": {
+        "ASC": {
+          "commanda": " \"file_clf\"  -Avo   \"SystemChannel=Binlog_GL.ini\"  -O  \"my_dir\" ",
+          "ext": "asc"
+        }
+      }
+
+    }
+  }
+
+}
