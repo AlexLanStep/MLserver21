@@ -51,8 +51,9 @@ namespace ParsJson
                     case "clexport":
                         {
                             IList<JToken> results0 = item.Children().ToList();
-
-                            var value = JsonConvert.DeserializeObject<Dictionary<string, object>>(File.ReadAllText(item.First.ToString()));
+                            var results1 = googleSearch["clexport"].Children();
+                            var results2 = googleSearch["clexport"].Children().ToList();
+                            //var value = JsonConvert.DeserializeObject<Dictionary<string, object>>(results2[0]);
                             continue;
                         }
                     case "error":

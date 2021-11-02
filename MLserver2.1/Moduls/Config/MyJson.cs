@@ -39,8 +39,10 @@ namespace Convert.Moduls.Config
         private readonly Config0 _config;
 
         private readonly string[] _fieldes = new[] { CarName, Clexport, Error };
-        private ConcurrentDictionary<string, string> BasaParams { get; set; }
-        private ConcurrentDictionary<string, ConcurrentDictionary<string, string>> ClexportParams { get; set; }
+        private ConcurrentDictionary<string, string> BasaParams { get; set; } = new();
+//        private ConcurrentDictionary<string, string> CarBasaParams { get; set; } = new();
+        private ConcurrentDictionary<string, ConcurrentDictionary<string, string>> ClexportParams { get; set; } = new();
+//        private ConcurrentDictionary<string, ConcurrentDictionary<string, string>> CarClexportParams { get; set; } = new();
 
         private readonly CarNameParams _carParams = new();
         private List<string> _lErrorConvert;
@@ -48,8 +50,10 @@ namespace Convert.Moduls.Config
         {
             _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, "Обработка файла (File processing) MlServerJson"));
             _lErrorConvert = new();
-            BasaParams = new ConcurrentDictionary<string, string>();
-            ClexportParams = new ConcurrentDictionary<string, ConcurrentDictionary<string, string>>();
+            //BasaParams = new ConcurrentDictionary<string, string>();
+            //ClexportParams = new ConcurrentDictionary<string, ConcurrentDictionary<string, string>>();
+            //CarBasaParams = new ConcurrentDictionary<string, string>();
+            //CarClexportParams = new();
 
             _config = config;
         }
@@ -86,7 +90,7 @@ namespace Convert.Moduls.Config
                 JsonClexport(googleSearch[Clexport]?.Children().ToList());
 
             if (danJsonBasa.Find(x => x.ToLower() == CarName) != null)
-                JsonCarClexport(googleSearch["Car name"]?.Children().ToList());
+                JsonCarClexport(googleSearch["car name"]?.Children().ToList());
 
             if (danJsonBasa.Find(x => x.ToLower() == Error) != null)
                 JsonError(googleSearch[Error]);
@@ -104,8 +108,8 @@ namespace Convert.Moduls.Config
         {
             foreach (var item in carxx.Children())
             {
-                ConcurrentDictionary<string, ConcurrentDictionary<string, string>> clexportParams = new();
-                ConcurrentDictionary<string, string> basaParams = new();
+                ConcurrentDictionary<string, ConcurrentDictionary<string, string>> _carClexportParams = new();
+                ConcurrentDictionary<string, string> _carBasaParams = new();
 
                 var key0 = (string)((JProperty)item.Parent)?.Name;
 
@@ -124,20 +128,20 @@ namespace Convert.Moduls.Config
                                     var _zz2 = (((JProperty)item1).Value).ToString();
                                     var htmlAttributes = JsonConvert.DeserializeObject<Dictionary<string, string>>(_zz2);
                                     var xx = new ConcurrentDictionary<string, string>(htmlAttributes);
-                                    ClexportParams.AddOrUpdate(name, xx, (_, _) => xx);
+                                    _carClexportParams.AddOrUpdate(name, xx, (_, _) => xx);
                                 }
                         }
 
                         if (((JProperty)item0).Name != Lrfdec) continue;
 
                         var x1 = val0[Lrfdec];
-                        basaParams.AddOrUpdate(Lrfdec, (string)x1, (_, _) => (string)x1);
+                        _carBasaParams.AddOrUpdate(Lrfdec, (string)x1, (_, _) => (string)x1);
                     }
 
                 _carParams.Add(key0, new CarNameDan()
                 {
-                    BasaParams = new ConcurrentDictionary<string, string>(basaParams),
-                    ClexportParams = new ConcurrentDictionary<string, ConcurrentDictionary<string, string>>(clexportParams)
+                    BasaParams = new ConcurrentDictionary<string, string>(_carBasaParams),
+                    ClexportParams = new ConcurrentDictionary<string, ConcurrentDictionary<string, string>>(_carClexportParams)
                 });
             }
         }
