@@ -22,17 +22,20 @@ namespace Convert.Moduls.Export
         private readonly string _ext;
         private readonly string _pathConvert;
         private readonly FileMove _renameFile;
+        private readonly string _outdir;
+        private readonly string _key;
         #endregion
 
         #region constructor
-        public SetNameTrigger(ref Config0 config, string typeconvert)
+        public SetNameTrigger(ref Config0 config, string outdir, string _key, string typeconvert)
         {
             _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, "Загружаем ( Load ) Class SetNameTrigger"));
-
+            _outdir = outdir;
             _config = config;
             var typeconvert1 = typeconvert.ToUpper();
-            _pathConvert = _config.MPath.OutputDir + "\\" + typeconvert1 + "\\";
-            _ext = "." + _config.ClexportParams[typeconvert1]["ext"];
+            _pathConvert = _outdir + "\\";
+            this._key = _key;
+            _ext = "." + _config.ClexportParams[_key]["ext"];
 
             if (_config.FMem.Count == 0)
             {

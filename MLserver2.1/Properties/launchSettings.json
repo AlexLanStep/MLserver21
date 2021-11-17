@@ -2,7 +2,7 @@
   "profiles": {
     "MLServer_2.0": {
       "commandName": "Project",
-      "commandLineArgs": "\"E:\\MLserver\\data\\#COMMON\\DLL\\convert.exe\"  \"E:\\MLserver\\data\\TT05SED\\log\\2021-10-31_14-06-03\"  ~test "
+      "commandLineArgs": "\"E:\\MLserver\\data\\#COMMON\\DLL\\convert.exe\"  \"E:\\MLserver\\data\\TT07SED\\log\\2021-11-16_08-52-55\"  ~test "
     }
   }
 }
