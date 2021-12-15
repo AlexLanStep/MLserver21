@@ -39,13 +39,34 @@ namespace Convert.Moduls.FileManager
             bool _isGuid = true;
             void SetFalse() => _isGuid = false;
             ThreadManager.Add(_guid, SetFalse, " LrdExeFile.Run() ");
-
+            TypeDanFromFile0[] __oldFiles = new TypeDanFromFile0[0];
             while ((FileDelete.GetCountFilesName() > 0) && _isGuid)
             {
+                var __countRec = FileDelete.GetCountFilesName(); 
                 _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, new[] { " LrdExeFile:\n "
                                                             , $"Удаляем файлы, ожидаем завершение, осталось -> \n" +
-                                                            $" Delete files, wait for completion, left ->  {FileDelete.GetCountFilesName()}" }));
+                                                            $" Delete files, wait for completion, left ->  {__countRec}" }));
 
+                if(__countRec >0)
+                {
+                    TypeDanFromFile0[] x = FileDelete.MasFiles();
+                    foreach (var item_x2 in x)
+                    {
+                        item_x2.CalcSecDateTime();
+                        if (item_x2.SecWait >= 3600)
+                        {
+                            _isGuid = false;
+                            break;
+                        }
+                    }
+
+                    ///////////////////////////
+                    ///     Проверить x.время_старта, может быть кол-во повторений или ....
+                    ///         1. Если проблема в файле -> Lrd сваливается, то перенести этот файл в новый каталог ErrorFile
+                    ///         2. Если блокировка в файле и его нельзя переексти остановить процесс.
+                    ///////////////////////////
+                }
+                
                 Thread.Sleep(1000);
             }
             ThreadManager.DelRecInDict(_guid);
