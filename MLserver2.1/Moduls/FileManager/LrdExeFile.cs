@@ -53,7 +53,7 @@ namespace Convert.Moduls.FileManager
                     foreach (var item_x2 in x)
                     {
                         item_x2.CalcSecDateTime();
-                        if (item_x2.SecWait >= 3600)
+                        if (item_x2.SecWait >= 60)
                         {
                             _isGuid = false;
                             break;
