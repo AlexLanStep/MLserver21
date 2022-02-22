@@ -64,7 +64,7 @@ namespace Convert.Moduls.Error
         private const string _err_23 = "В файле ( In file ) %file% нет данных о ( no data on ) Trigger и времени ( and time ) " + NameModulConfig;
         private const string _err_231 = "В файле ( In file ) %file% нет поля ( and fields ) => filename";
         private const string _err_24 = "Нет каталога ( No catalog ) #COMMON " + NameModulConfig;
-        private const string _err_211 = " Нет соответствия запрашиваемых данных и полученных ==> Модуль конфигурации инициализация \n " +
+`        private const string _err_211 = " Нет соответствия запрашиваемых данных и полученных ==> Модуль конфигурации инициализация \n " +
                                         " There is no correspondence between the requested data and the received data ==> Configuration module initialization" + NameModulConfig;
         private const string _err_212 = " Нет данных в ( No data in ) ml_rt2 " + NameModulConfig;
         private const string _err_213 = " Нет данных в ( No data in ) TextLog, время срабатывания триггера ( trigger time ) " + NameModulConfig;
