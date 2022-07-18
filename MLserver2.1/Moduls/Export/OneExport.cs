@@ -27,6 +27,7 @@ namespace Convert.Moduls.Export
         private SetNameTrigger _setNameTrigger;
         private Task _waitNameTrigger;
         private string _ext;
+        private string _keyDict;
         #endregion
 
         #region Constructor
@@ -37,7 +38,8 @@ namespace Convert.Moduls.Export
             _config = config;
             _commandExport = typeExport.Item2;
             _ext = typeExport.Item3;
-            _outDir = _config.MPath.OutputDir + "\\" + typeExport.Item1;
+            _keyDict = typeExport.Item1;
+            _outDir = _config.MPath.OutputDir + "\\" + _keyDict;
             _patternFile = @"_M\d_\(\d{4}-\d\d-\d\d_\d\d-\d\d-\d\d\)_\(\d{4}-\d\d-\d\d_\d\d-\d\d-\d\d\).clf";
             _dirClfRun = new ConcurrentDictionary<string, Task>();
             _config.Time1Sec += _config_Time1Sec;
@@ -161,7 +163,7 @@ namespace Convert.Moduls.Export
 
                 _config.IsRun.IsExport = true;
 
-                _setNameTrigger = new SetNameTrigger(ref _config, _ext);
+                _setNameTrigger = new SetNameTrigger(ref _config, _outDir, _keyDict, _ext);
                 _waitNameTrigger = Task.Run(() => _setNameTrigger.Run());
 
                 _startDateTime = DateTime.Now;

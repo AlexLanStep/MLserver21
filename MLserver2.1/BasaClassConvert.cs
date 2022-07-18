@@ -64,6 +64,22 @@ namespace MLServer_2._1
                 _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, " Запуск-> Обработка сырых данных \n" +
                                                                                  " Launch-> Raw Data Processing"));
 
+                if (File.Exists(_dArgs["WorkDir"] + "\\DbConfig.json"))
+                {
+                    try
+                    {
+                        _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, " Удаляем файл DbConfig.json \n" +
+                                                                                         " Delete file DbConfig.json"));
+                        File.Delete(_dArgs["WorkDir"] + "\\DbConfig.json");
+                    }
+                    catch (Exception)
+                    {
+                        _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, " Проблема c файлом DbConfig.json \n" +
+                                                                                         " Error file DbConfig.json"));
+                        Environment.Exit(-1110);
+                    }
+                }
+
                 ConvertOne convertOne = new ConvertOne(ref config);
                 convertOne.Run();
 

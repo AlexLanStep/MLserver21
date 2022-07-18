@@ -128,6 +128,9 @@ namespace Convert.Moduls.FileManager
 
         }
         public int GetCountFilesName() => FilesNameQueue != null ? FilesNameQueue.Count : 0;
+        public TypeDanFromFile0[] MasFiles() =>
+            (FilesNameQueue == null || FilesNameQueue.Count == 0)? new TypeDanFromFile0[0]: FilesNameQueue.ToArray();
+         
         public void SetExitRepit()
         {
             _isExitRepitFilesNameQueue = true;

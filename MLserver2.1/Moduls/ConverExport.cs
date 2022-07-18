@@ -38,12 +38,35 @@ namespace Convert.Moduls
                     , (_, _) => new OneExport(ref _config, (item.Key, item.Value["commanda"], item.Value["ext"])));
 
                 _allRun[item.Key].Run();
+                
+            }
+//            Thread.Sleep(1000);
+            TimeSpan ts = TimeSpan.FromMilliseconds(1000);
+
+           
+
+            while (_allRun.Count>0)
+            {
+                var _ls_key = _allRun.Keys;
+
+                foreach (var item in _ls_key)
+                {
+                    var status = _allRun[item].TaskRun.Status;
+
+                    if (status == TaskStatus.RanToCompletion || status == TaskStatus.Faulted || status == TaskStatus.Canceled)
+                    {
+                        _ = _allRun.TryRemove(item, out var value1);
+                    }
+                }
+                Thread.Sleep(1000);
             }
 
-            foreach (var item in _allRun)
-            {
-                item.Value.TaskRun.Wait();
-            }
+//            foreach (var item in _allRun)
+//            {
+//                var status = item.Value.TaskRun.Status;
+////                var status = item.Value.ErrorRun.;
+//                item.Value.TaskRun.Wait(ts);
+//            }
         }
 
         private void copy_siglog()
