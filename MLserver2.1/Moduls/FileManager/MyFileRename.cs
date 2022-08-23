@@ -36,12 +36,12 @@ namespace Convert.Moduls.FileManager
             {
                 var xx = FilesNameQueue.ToList().Where(x => x.Count > 3 | x.SecWait > 60).Select(x => (x.NameFile1, x.Count, x.SecWait));
                 var sWrite = $" count {FilesNameQueue.Count}    --------------------------------------------------";
-                _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, " MyFileRename =>  " + sWrite));
+                _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, " MyFileRename =>  " + sWrite));
 
                 foreach (var (nameFile1, count, secWait) in xx)
                 {
                     sWrite = $" path-> {nameFile1}  Count {count} , SecWait {secWait}";
-                    _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, " MyFileRename =>  " + sWrite));
+                    _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, " MyFileRename =>  " + sWrite));
                 }
                 Thread.Sleep(500);
                 Console.WriteLine("  цикл TestQueue ожидаем ( TestQueue loop awaiting ) ");

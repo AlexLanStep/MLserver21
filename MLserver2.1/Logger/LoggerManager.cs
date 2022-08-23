@@ -43,7 +43,7 @@ namespace Convert.Logger
             _writeDanTask = Task.Run(ProcessWriteAsync, _tokenWriteAsync.Token);
 
             _loggerManager = this;
-            _ = AddLoggerAsync(new LoggerEvent(EnumError.Info, "Start programm convert " + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss")));
+            _ = AddLoggerTask(new LoggerEvent(EnumError.Info, "Start programm convert " + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss")));
         }
         #endregion
 
@@ -84,7 +84,7 @@ namespace Convert.Logger
 //        public static void NewNameFile(string filename) => 
 //            _loggerManager._filename = filename + "\\LOG\\" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".log";
 
-        public static Task AddLoggerAsync(LoggerEvent e)
+        public static Task AddLoggerTask(LoggerEvent e)
         {
             _loggerManager._cq.Enqueue(e);
             return Task.CompletedTask;
@@ -92,7 +92,7 @@ namespace Convert.Logger
         #endregion
 
         #region Procecc 
-        public async Task ProcessWriteAsync()
+        public void ProcessWriteAsync()
         {
             _ctWriteAsync.ThrowIfCancellationRequested();
             while (true) 
@@ -106,8 +106,9 @@ namespace Convert.Logger
                         text += "\n" + st;
                         if (text.Length * 2 >= 4096 * 12)
                         {
-                            await WriteTextAsync(_filename, text);
-                            break;
+                          var xwait = WriteTextAsync(_filename, text);
+                          xwait.Wait();
+                          break;
                         }
                         if (_strListWrite.Count > 0)
                             continue;
@@ -145,9 +146,8 @@ namespace Convert.Logger
                         // ignored
                     }
 
-                    await Task.Delay(550);
+                    Thread.Sleep(550);
                 }
-
                 try
                 {
                     if (_ctWriteAsync.IsCancellationRequested)

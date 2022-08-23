@@ -21,12 +21,12 @@ namespace Convert.Moduls.Export
             var result = ExeInfo();
 
             var sWrite = $"  Код завершения программы ( Program termination code )  {result.CodeError}  ";
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, " RunCLexport =>  " + sWrite));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, " RunCLexport =>  " + sWrite));
 
             if (result.CodeError != 0)
             {
                 sWrite = " !!!  Бардак!! ( !!! Mess !!!  ) ";
-                _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, " RunCLexport =>  " + sWrite));
+                _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, " RunCLexport =>  " + sWrite));
             }
 
             if (result.CodeError == 0) return false;
@@ -37,7 +37,7 @@ namespace Convert.Moduls.Export
         public override void CallBackFun(string line)
         {
             if (line.Length <= 0) return;
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, " RunCLexport =>  " + line));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, " RunCLexport =>  " + line));
         }
 
     }

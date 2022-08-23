@@ -28,7 +28,7 @@ namespace Convert.Moduls.FileManager
         {
             if (line.Length <= 0) return;
             Lines.Add(line);
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, $" ExeFileInfo =->  {line} "));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, $" ExeFileInfo =->  {line} "));
         }
 
         public virtual InfoExe ExeInfo()

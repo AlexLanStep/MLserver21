@@ -29,7 +29,7 @@ namespace Convert.Moduls.Export
         #region constructor
         public SetNameTrigger(ref Config0 config, string outdir, string _key, string typeconvert)
         {
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, "Загружаем ( Load ) Class SetNameTrigger"));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, "Загружаем ( Load ) Class SetNameTrigger"));
             _outdir = outdir;
             _config = config;
             var typeconvert1 = typeconvert.ToUpper();
@@ -64,7 +64,7 @@ namespace Convert.Moduls.Export
         #endregion
 
         #region Public Function Run
-        public async Task Run()
+        public void Run()
         {
             _config.IsRun.IsExportRename = true;
             Guid _guid = Guid.NewGuid();
@@ -77,8 +77,8 @@ namespace Convert.Moduls.Export
                 var ls = _findFileDirClf();
                 if (ls.Count <= 0)
                 {
-                    await Task.Delay(1000);
-                    continue;
+                  Thread.Sleep(1000);
+                  continue;
                 }
                 var lsM1 = ls.Where(x => x.ToLower().Contains("_m1_") && x.ToUpper().Contains(")F")).ToList();
                 var lsM2 = ls.Where(x => x.ToLower().Contains("_m2_") && x.ToUpper().Contains(")F")).ToList();
@@ -93,9 +93,9 @@ namespace Convert.Moduls.Export
 
                 waitM1?.Wait();
                 waitM2?.Wait();
-                await Task.Delay(500);
+                Thread.Sleep(1000);
             }
-            
+
             ThreadManager.DelRecInDict(_guid);
             _config.IsRun.IsExportRename = false;
 
@@ -121,9 +121,8 @@ namespace Convert.Moduls.Export
                     select Path.GetFileName(item))
                         .ToList();
         }
-        private async Task _rename_m1(List<string> ls1)
-        {
-            await Task.Run(() =>
+        private Task _rename_m1(List<string> ls1)
+          => Task.Run(() =>
               {
 //                  var z = _config.FMem;
                   var ls = new List<string>(ls1);
@@ -155,10 +154,9 @@ namespace Convert.Moduls.Export
 
                   }
               });
-        }
-        private async Task _rename_m2(IReadOnlyCollection<string> ls1)
-        {
-            await Task.Run(() =>
+        
+        private  Task _rename_m2(IReadOnlyCollection<string> ls1)
+          => Task.Run(() =>
             {
                 var z = _config.FMem;
 
@@ -195,7 +193,7 @@ namespace Convert.Moduls.Export
                     _renameFile.Add(item, _newFile);
                 }
             });
-        }
+        
         #endregion
 
     }

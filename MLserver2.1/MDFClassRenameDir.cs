@@ -22,7 +22,7 @@ namespace MLServer_2._1
         public void Run()
         {
             LoggerManager logger = new(_dArgs["WorkDir"] + "\\Log");
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, "Входные данные проверенные \n Input data verified"));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, "Входные данные проверенные \n Input data verified"));
 
             var errorBasa = new ErrorBasa();
             Config0 config = new();
@@ -38,7 +38,7 @@ namespace MLServer_2._1
 
             SetupParam _setupParam = new(ref config);
             _setupParam.IniciaPathJson();
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, " - Инициализация параметров закончилась \n " +
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, " - Инициализация параметров закончилась \n " +
                                                                              " - Parameter initialization is over"));
 
             ConcurrentDictionary<string, int> _pathFileMDF = new ConcurrentDictionary<string, int>();
@@ -46,22 +46,24 @@ namespace MLServer_2._1
             DateTime _dataEnd = new DateTime(2021, 06, 03, 16, 0, 0);
 
             var _findMdf = new FindDirMDF(_dArgs["MDFRenameDir"], ref _pathFileMDF, _dataStart, _dataEnd);
-            var _waitFindDir = _findMdf.Run();
-            _waitFindDir.Wait();
+            //var _waitFindDir = 
+            _findMdf.Run();
+            //_waitFindDir.Wait();
 
             var _keyPaths = _pathFileMDF.Keys;
 
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, "########## - Запуск переименования ######## \n " +
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, "########## - Запуск переименования ######## \n " +
                                                                              "########## - Start renaming ########", EnumLogger.Monitor));
 
             List<Task> _runReanme = new List<Task>();
             foreach (var item in _keyPaths)
             {
-                _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, $"##  -> {item}   ##", EnumLogger.Monitor));
-                _runReanme.Add(new RenameMDF(item).Run());
-            }
+                _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, $"##  -> {item}   ##", EnumLogger.Monitor));
+        //                _runReanme.Add(new RenameMDF(item).Run());
+        _runReanme.Add(Task.Run(() => { new RenameMDF(item).Run(); }) ); //
+      }
 
-            Guid _guid = Guid.NewGuid();
+      Guid _guid = Guid.NewGuid();
             bool _isGuid = true;
             void SetFalse() => _isGuid = false;
             ThreadManager.Add(_guid, SetFalse, " MDFClassRenameDir ");

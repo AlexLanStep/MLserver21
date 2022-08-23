@@ -17,7 +17,7 @@ namespace Convert.Moduls
         protected Config0 Config;
         public RenameFileClfMoveBasa(ref Config0 config)
         {
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, "Загружаем Class RenameFileClfMoveBasa \n" +
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, "Загружаем Class RenameFileClfMoveBasa \n" +
                                                                              "Load Class RenameFileClfMoveBasa"));
             Config = config;
         }
@@ -111,7 +111,7 @@ namespace Convert.Moduls
     {
         public RenameFileClfMove(ref Config0 config) : base(ref config)
         {
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, "Загружаем Class RenameFileClfMove \n " +
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, "Загружаем Class RenameFileClfMove \n " +
                                                                              "Load Class RenameFileClfMove"));
 
         }

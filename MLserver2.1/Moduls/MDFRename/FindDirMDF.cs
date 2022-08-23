@@ -29,7 +29,7 @@ namespace MLServer_2._1.Moduls.MDFRename
             _dtend = dtend;
         }
 
-        public async Task Run()
+        public void Run()
         {
             string[] globPaths = Directory.GetDirectories(path);
 
@@ -38,7 +38,6 @@ namespace MLServer_2._1.Moduls.MDFRename
 
             for (int i = 0; i < globPaths.Length; i++)
                 ThreadPool.QueueUserWorkItem(F0, (_barrier, globPaths[i]));
-            await Task.Delay(1);
             _barrier.SignalAndWait();
 
         }

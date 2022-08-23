@@ -20,7 +20,7 @@ namespace Convert.Moduls
         #endregion
         public ConvertSource(ref Config0 config)
         {
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, "Создаем class ConvertSource"));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, "Создаем class ConvertSource"));
             _config = config;
             Func<string, string> dirCreate = (NameDir) =>
             {
@@ -52,7 +52,7 @@ namespace Convert.Moduls
             var testByte = new List<Task>();
             foreach (var item in direct)
             {
-                _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, $" ConvertSource -> {item}"));
+                _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, $" ConvertSource -> {item}"));
 
                 testByte.Add(Task.Factory.StartNew(() =>
                 {
@@ -112,7 +112,7 @@ namespace Convert.Moduls
                 while ((FilesSourse().Length > 0) && _isGuid)
                 {
                     //Console.WriteLine($"  кол-во файлов  ---  FilesSourse().Count()");
-                    _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, $"  кол-во файлов (number of files) ---  {FilesSourse().Count()}"));
+                    _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, $"  кол-во файлов (number of files) ---  {FilesSourse().Count()}"));
                     resultat = new LrdExeFile(_config.MPath.LrfDec,
                                                 _config.MPath.WorkDir,
                                                 _config.BasaParams["lrf_dec"], ref _config).Run();
@@ -135,7 +135,7 @@ namespace Convert.Moduls
             //    while (FilesSourse().Length > 0 && _is)
             //    {
             //        //Console.WriteLine($"  кол-во файлов  ---  FilesSourse().Count()");
-            //        _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, $"  кол-во файлов (number of files) ---  {FilesSourse().Count()}"));
+            //        _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, $"  кол-во файлов (number of files) ---  {FilesSourse().Count()}"));
             //        resultat = new LrdExeFile(_config.MPath.LrfDec,
             //                                    _config.MPath.WorkDir,
             //                                    _config.BasaParams["lrf_dec"], ref _config).Run();
@@ -147,13 +147,13 @@ namespace Convert.Moduls
 
             res.Wait();
             // Console.WriteLine(" *****   ******  конвертация сырых данных завершена  ***** ");
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, " *****   ******  конвертация сырых данных завершена  ***** "));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, " *****   ******  конвертация сырых данных завершена  ***** "));
             _config.IsRun.IsSource = false;
             resulRename.Wait();
             _converExportTask.Wait();
 
             // Console.WriteLine(" ***** ## ******  Переименование и перемецение CLF файлов завершена  ***** ");
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, " ***** ## ******  Переименование и перемецение CLF файлов завершена  ***** "));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, " ***** ## ******  Переименование и перемецение CLF файлов завершена  ***** "));
 
             return resulRename; //.Result;
         }
