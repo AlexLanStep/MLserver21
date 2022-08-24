@@ -56,7 +56,10 @@ namespace Convert.Moduls.Config
 
                     s += $"[DB{i}] \n";
                     s += "Path=" + filename + "\\" + item["path"] + "\n";
-                    s += "Network=" + item["networkname"] + "\n";
+                    string __s = item["networkname"];
+                    if(__s != null && __s.Length > 0) 
+                      __s = __s[0].ToString().ToUpper() + __s.Substring(1, __s.Length-1);
+                    s += "Network=" + __s + "\n";
                     s += "Bus=" + item["bustype"] + "\n";
                     s += "Channels=" + item["channel"] + "\n";
                 }
