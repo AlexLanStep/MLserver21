@@ -16,7 +16,7 @@ namespace Convert.Moduls.Config
         #region constructor
         public FindCommand(string pathBegin)
         {
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, "Поиск каталога #COMMON "));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, "Поиск каталога #COMMON "));
             PathBegin = new FileInfo(pathBegin).DirectoryName;
         }
         #endregion

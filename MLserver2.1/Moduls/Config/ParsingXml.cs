@@ -17,7 +17,7 @@ namespace Convert.Moduls.Config
         #region construct
         public ParsingXml(ref Config0 config)
         {
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, "Загружаем Class ParsingXml"));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, "Загружаем Class ParsingXml"));
 
             _config = config;
             _config.VSysVarPath = "";
@@ -66,7 +66,7 @@ namespace Convert.Moduls.Config
                 s0 += sr.ReadToEnd();
             s0 += s;
 
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, s0));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, s0));
 
             _config.SiglogFileInfo = s0;
 

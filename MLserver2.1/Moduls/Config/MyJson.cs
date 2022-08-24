@@ -48,7 +48,7 @@ namespace Convert.Moduls.Config
         private List<string> _lErrorConvert;
         public MlServerJson(ref Config0 config)
         {
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, "Обработка файла (File processing) MlServerJson"));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, "Обработка файла (File processing) MlServerJson"));
             _lErrorConvert = new();
             //BasaParams = new ConcurrentDictionary<string, string>();
             //ClexportParams = new ConcurrentDictionary<string, ConcurrentDictionary<string, string>>();

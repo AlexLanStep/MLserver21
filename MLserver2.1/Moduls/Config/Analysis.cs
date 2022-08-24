@@ -17,7 +17,7 @@ namespace Convert.Moduls.Config
 
         public Analysis(ref Config0 config)
         {
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, "Загружаем Class Analysis"));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, "Загружаем Class Analysis"));
             _config = config;
             RezDirAnalis = "";
         }
@@ -49,7 +49,7 @@ namespace Convert.Moduls.Config
 
             if (RezDirAnalis == "") return "";
 
-            _ = LoggerManager.AddLoggerAsync
+            _ = LoggerManager.AddLoggerTask
                 (new LoggerEvent(EnumError.Info, $"Конфигурацию берем из {RezDirAnalis}", EnumLogger.Monitor));
 
             return RezDirAnalis;

@@ -18,7 +18,7 @@ namespace Convert.Moduls
         #endregion
         public ConverExport(ref Config0 config)
         {
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, "Создаем (Creact) class ConverExport"));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, "Создаем (Creact) class ConverExport"));
 
             _config = config;
 
@@ -34,11 +34,11 @@ namespace Convert.Moduls
             copy_siglog();
             foreach (var item in _config.ClexportParams)
             {
+              
                 _allRun.AddOrUpdate(item.Key, new OneExport(ref _config, (item.Key, item.Value["commanda"], item.Value["ext"]))
                     , (_, _) => new OneExport(ref _config, (item.Key, item.Value["commanda"], item.Value["ext"])));
 
                 _allRun[item.Key].Run();
-                
             }
 //            Thread.Sleep(1000);
             TimeSpan ts = TimeSpan.FromMilliseconds(1000);

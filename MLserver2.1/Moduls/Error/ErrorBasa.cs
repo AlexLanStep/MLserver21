@@ -64,7 +64,7 @@ namespace Convert.Moduls.Error
         private const string _err_23 = "В файле ( In file ) %file% нет данных о ( no data on ) Trigger и времени ( and time ) " + NameModulConfig;
         private const string _err_231 = "В файле ( In file ) %file% нет поля ( and fields ) => filename";
         private const string _err_24 = "Нет каталога ( No catalog ) #COMMON " + NameModulConfig;
-`        private const string _err_211 = " Нет соответствия запрашиваемых данных и полученных ==> Модуль конфигурации инициализация \n " +
+        private const string _err_211 = " Нет соответствия запрашиваемых данных и полученных ==> Модуль конфигурации инициализация \n " +
                                         " There is no correspondence between the requested data and the received data ==> Configuration module initialization" + NameModulConfig;
         private const string _err_212 = " Нет данных в ( No data in ) ml_rt2 " + NameModulConfig;
         private const string _err_213 = " Нет данных в ( No data in ) TextLog, время срабатывания триггера ( trigger time ) " + NameModulConfig;
@@ -90,7 +90,7 @@ namespace Convert.Moduls.Error
 
         public ErrorBasa()
         {
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, "Загружаем Class ErrorBasa"));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, "Загружаем Class ErrorBasa"));
 
             _errorBasa = this;
             en = _errorBasa.ErrorNun;
@@ -148,7 +148,7 @@ namespace Convert.Moduls.Error
             var info = _errorBasa.DError[cod];
             var typeerror = info.Item3;
 
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(typeerror, (string)info.Item1));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(typeerror, (string)info.Item1));
 
             if (typeerror != EnumError.Error) return;
 
@@ -161,8 +161,8 @@ namespace Convert.Moduls.Error
             switch (DError[cod].Item1.GetType().Name)
             {
                 case "STypeError2":
-                    //                    _iLogger.AddLoggerInfoAsync(new LoggerEvent(_errorBasa.DError[cod].Item3, ((STypeError2)DError[cod].Item1).Set(message)));
-                    _ = LoggerManager.AddLoggerAsync(new LoggerEvent(_errorBasa.DError[cod].Item3, ((STypeError2)DError[cod].Item1).Set(message)));
+                    //                    _iLogger.AddLoggerInfo(new LoggerEvent(_errorBasa.DError[cod].Item3, ((STypeError2)DError[cod].Item1).Set(message)));
+                    _ = LoggerManager.AddLoggerTask(new LoggerEvent(_errorBasa.DError[cod].Item3, ((STypeError2)DError[cod].Item1).Set(message)));
                     break;
             }
 
@@ -177,20 +177,18 @@ namespace Convert.Moduls.Error
             public int Cod { get; set; }
             public object Mes { get; set; }
         }
-        public static async Task FError(int cod, string message = "")
-        {
-            await Task.Factory.StartNew(x0 =>
-            {
-                var z1 = (S01)x0;
-                var (_, item2, _) = _errorBasa.DError[z1.Cod];
-                switch (item2.GetType().Name)
-                {
-                    case "DelegErrorNun":
-                        ((DelegErrorNun)item2)(z1.Cod);
-                        break;
-                    case "DelegErrorNunMessag": ((DelegErrorNunMessag)item2)(z1.Cod, (string)z1.Mes); break;
-                }
-            }, new S01(cod, message));
-        }
+        public static  Task FError(int cod, string message = "") 
+          =>  Task.Factory.StartNew(x0 =>
+              {
+                  var z1 = (S01)x0;
+                  var (_, item2, _) = _errorBasa.DError[z1.Cod];
+                  switch (item2.GetType().Name)
+                  {
+                      case "DelegErrorNun":
+                          ((DelegErrorNun)item2)(z1.Cod);
+                          break;
+                      case "DelegErrorNunMessag": ((DelegErrorNunMessag)item2)(z1.Cod, (string)z1.Mes); break;
+                  }
+              }, new S01(cod, message));
     }
 }

@@ -15,7 +15,7 @@ namespace Convert.Moduls.FileManager
         public LrdExeFile(string exefile, string filenamr, string command, ref Config0 config)
                                                              : base(exefile, filenamr, command)
         {
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, "Загружаем ( Load ) Class LrdExeFile"));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, "Загружаем ( Load ) Class LrdExeFile"));
 
             FileDelete = new FileDelete(ref config);
         }
@@ -25,12 +25,12 @@ namespace Convert.Moduls.FileManager
             FileDelete.Run();
 
             var result = ExeInfo();
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, new[] { " LrdExeFile:\n ", 
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, new[] { " LrdExeFile:\n ", 
                 $"  Код завершения программы ( Program termination code ) { result.CodeError }  " }));
 
             if (result.CodeError != 0)
             {
-                _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, "  LrdExeFile ->  !!!  Бардак!! ( !!!! Mess !!!  ) "));
+                _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, "  LrdExeFile ->  !!!  Бардак!! ( !!!! Mess !!!  ) "));
             }
 
             FileDelete.SetExitRepit();
@@ -43,7 +43,7 @@ namespace Convert.Moduls.FileManager
             while ((FileDelete.GetCountFilesName() > 0) && _isGuid)
             {
                 var __countRec = FileDelete.GetCountFilesName(); 
-                _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, new[] { " LrdExeFile:\n "
+                _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, new[] { " LrdExeFile:\n "
                                                             , $"Удаляем файлы, ожидаем завершение, осталось -> \n" +
                                                             $" Delete files, wait for completion, left ->  {__countRec}" }));
 
@@ -81,7 +81,7 @@ namespace Convert.Moduls.FileManager
         public override void CallBackFun(string line)
         {
             if (line.Length <= 0) return;
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, $"  LrdExeFile ->  {line}  "));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, $"  LrdExeFile ->  {line}  "));
 
             if (!line.ToLower().Contains("file")) return;
 

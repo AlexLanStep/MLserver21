@@ -59,7 +59,7 @@ namespace Convert.Moduls.FileManager
                                 continue;
 
                             //                            Console.WriteLine($" ==--> {_value.NameFile0} ");
-                            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, $" FileMove -> {_value.NameFile0} "));
+                            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, $" FileMove -> {_value.NameFile0} "));
 
                             try
                             {
@@ -103,7 +103,7 @@ namespace Convert.Moduls.FileManager
             //                    continue;
 
             //                //                            Console.WriteLine($" ==--> {_value.NameFile0} ");
-            //                _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, $" FileMove -> {_value.NameFile0} "));
+            //                _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, $" FileMove -> {_value.NameFile0} "));
 
             //                try
             //                {

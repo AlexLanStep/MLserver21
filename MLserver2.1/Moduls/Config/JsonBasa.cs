@@ -21,7 +21,7 @@ namespace Convert.Moduls.Config
         #region Constructor
         public JsonBasa(ref Config0 config)
         {
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, "Загружаем Class JsonBasa"));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, "Загружаем Class JsonBasa"));
 
             this._config = config;
             _jsonBasa = this;
@@ -52,7 +52,7 @@ namespace Convert.Moduls.Config
             await File.WriteAllTextAsync(_jsonBasa._config.MPath.DbConfig,
                 JsonConvert.SerializeObject(_jsonBasa._config.FileMemInfo, Formatting.Indented));
 
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, "Сохранить данные в (Sawe dan in) DbConfig.json"));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, "Сохранить данные в (Sawe dan in) DbConfig.json"));
         }
         #endregion
 
@@ -71,7 +71,7 @@ namespace Convert.Moduls.Config
                 var dbConfig = LoadFileJso<ConcurrentDictionary<string, ConcurrentDictionary<string, MemoryInfo>>>(_jsonBasa._config.MPath.DbConfig);
                 _jsonBasa._config.DbConfig = dbConfig ?? new TypeDStringMemoryInfo1();
 
-                _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, "Чтение данных из (Read dan from ) DbConfig.json"));
+                _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, "Чтение данных из (Read dan from ) DbConfig.json"));
             }
             else
                 _jsonBasa._config.DbConfig = new TypeDStringMemoryInfo1();

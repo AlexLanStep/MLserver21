@@ -2,15 +2,7 @@
   "profiles": {
     "MLServer_2.0": {
       "commandName": "Project",
-<<<<<<< HEAD
-      "commandLineArgs": "\"E:\\MLserver\\data\\#COMMON\\DLL\\convert.exe\"  \"E:\\MLserver\\data\\PTA10SUV\\log\\2022-07-12_15-05-57\"  ~test "
-=======
-<<<<<<< HEAD
-      "commandLineArgs": "\"C:\\LOGs\\Vector_GL3200\\#COMMON\\Dll\\convert.exe\"  \"C:\\LOGs\\Vector_GL3200\\TT05SED\\log\\2021-10-31_19-48-21\"  ~test "
-=======
-      "commandLineArgs": "\"E:\\MLserver\\data\\#COMMON\\DLL\\convert.exe\"  \"E:\\MLserver\\data\\PTB13SUV\\log\\2022-02-20_15-17-29\"  ~test "
->>>>>>> ac861a902e65c19324d32fcc5f2385da2fa43490
->>>>>>> ce6f8ff7d84b85074d41751c024095a074afadc9
+      "commandLineArgs": "\"E:\\MLserver\\data\\#COMMON\\DLL\\convert.exe\"  \"E:\\MLserver\\data\\TT07SED\\log\\2021-12-17_15-20-52\"  ~test "
     }
   }
 }

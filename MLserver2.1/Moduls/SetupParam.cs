@@ -23,7 +23,7 @@ namespace Convert.Moduls
         #endregion
         public SetupParam(ref Config0 config)
         {
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, "Запуск (Start) class SetupParam "));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, "Запуск (Start) class SetupParam "));
             this._config = config;
             _inicial01();
 
@@ -31,7 +31,7 @@ namespace Convert.Moduls
 
         private void _inicial01()
         {
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info,
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info,
                     new[]{ "SetupParam \n"
                     , "инициализация параметров: \n"
                     , " - для ml_rt, ml_rt2, TextLog \n"
@@ -61,7 +61,7 @@ namespace Convert.Moduls
             //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   
             //     Настроить загрузку данных 
 
-            _ = LoggerManager.AddLoggerAsync(
+            _ = LoggerManager.AddLoggerTask(
                 new LoggerEvent(EnumError.Info, new[] { "SetupParam \n", "Грузим файл конфигурации DbConfig \n" +
                                                                          "Loading the DbConfig configuration file" }));
 

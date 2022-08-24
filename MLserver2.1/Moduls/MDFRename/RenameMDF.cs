@@ -40,7 +40,7 @@ namespace MLServer_2._1.Moduls.MDFRename
 
         #region Run
 
-        public async Task Run()
+        public void Run()
         {
                 var x0 = DbConfig
                     .Where(x => x.Key.ToLower()
@@ -74,14 +74,11 @@ namespace MLServer_2._1.Moduls.MDFRename
                 waitM2 = Task.Run(() => _rename_m2(lsM2));
 
             Task.WaitAll(waitM1, waitM2);
-
-            return ;
         }
 
-        private async Task _rename_m1(List<string> ls1)
-        {
-            await Task.Run(() =>
-            {
+        private  Task _rename_m1(List<string> ls1) 
+          => Task.Run(() =>
+             {
                 var ls = new List<string>(ls1);
                 foreach (var item in ls)
                 {
@@ -110,11 +107,10 @@ namespace MLServer_2._1.Moduls.MDFRename
                     _renameFile.Add(file, _newFile);
 
                 }
-            });
-        }
-        private async Task _rename_m2(IReadOnlyCollection<string> ls1)
-        {
-            await Task.Run(() =>
+             });
+        
+        private Task _rename_m2(IReadOnlyCollection<string> ls1)
+          => Task.Run(() =>
             {
 
                 List<string> ls = new(ls1);
@@ -150,7 +146,7 @@ namespace MLServer_2._1.Moduls.MDFRename
                     _renameFile.Add(file, _newFile);
                 }
             });
-        }
+        
         #endregion
     }
 }

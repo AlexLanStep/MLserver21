@@ -34,7 +34,7 @@ namespace Convert.Moduls.ClfFileType
         public ClfFileInfo(string filename, ref FileMove renameFile, ref Config0 config)
                              : base(config.MPath.FileType, filename, "")
         {
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, "Загружаем Class ClfFileInfo"));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, "Загружаем Class ClfFileInfo"));
 
             IsError = false;
             _config = config;
@@ -55,11 +55,11 @@ namespace Convert.Moduls.ClfFileType
 
             //            Console.WriteLine($"  Код завершения программы {result.CodeError}  ");
             var s = $"  Код завершения программы {result.CodeError}  ";
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, new[] { "-ClfFileInfo => ", s }));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, new[] { "-ClfFileInfo => ", s }));
             if (result.CodeError != 0)
             {
                 //                Console.WriteLine(" !!!  Бардак!! ");
-                _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, new[] { "-ClfFileInfo => ", "!!!  Бардак!! " }));
+                _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, new[] { "-ClfFileInfo => ", "!!!  Бардак!! " }));
             }
 
             var nameCarx = Lines.Find(x => x.Contains("Car: ["));
@@ -167,7 +167,7 @@ namespace Convert.Moduls.ClfFileType
         public override void CallBackFun(string line)
         {
             if (line.Length <= 0) return;
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, $" {line} "));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, $" {line} "));
             Lines.Add(line);
         }
         #endregion

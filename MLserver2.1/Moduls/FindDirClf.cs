@@ -49,7 +49,7 @@ namespace Convert.Moduls
                 {
                     if (!_dir0.ContainsKey(item)) continue;
 
-                    _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, $" FindDirClf - {item}  "));
+                    _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, $" FindDirClf - {item}  "));
 
                     _dir0.TryRemove(item, out _);
                     foreach (var item0 in Directory.GetDirectories(item))

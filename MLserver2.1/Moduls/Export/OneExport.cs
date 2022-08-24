@@ -33,7 +33,7 @@ namespace Convert.Moduls.Export
         #region Constructor
         public OneExport(ref Config0 config, (string, string, string) typeExport)
         {
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, "Загружаем ( Load ) Class OneExport"));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, "Загружаем ( Load ) Class OneExport"));
 
             _config = config;
             _commandExport = typeExport.Item2;
@@ -66,7 +66,7 @@ namespace Convert.Moduls.Export
             //  Нет директорий с сырыми данными закончилась ВСЯ обработка сырых данных
             if (!directSour.Any() && !(_config.IsRun.IsRename || _config.IsRun.IsClr || _config.IsRun.IsSource))
             {
-                _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Warning, "  Нет директорий с сырыми данными закончилась ВСЯ обработка сырых данных  Error - 0 "));
+                _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Warning, "  Нет директорий с сырыми данными закончилась ВСЯ обработка сырых данных  Error - 0 "));
                 return 0; 
             }
 
@@ -80,7 +80,7 @@ namespace Convert.Moduls.Export
             }
             catch (Exception)
             {
-                _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Warning, "  Error in _countSourseFiles() to Repit  =>  _countSourseFiles()"));
+                _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Warning, "  Error in _countSourseFiles() to Repit  =>  _countSourseFiles()"));
                 _countSourseFiles();
             }
 
@@ -118,7 +118,7 @@ namespace Convert.Moduls.Export
                 {   //  1.4.
                     if (_countSourseFiles() <= 0 && !(_config.IsRun.IsRename || _config.IsRun.IsClr || _config.IsRun.IsSource))
                     {
-                        _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Warning, "  _runTestStartProcess() ->  Сход -1"));
+                        _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Warning, "  _runTestStartProcess() ->  Сход -1"));
                         return -1;     //  1.5.
                     }
 
@@ -132,12 +132,12 @@ namespace Convert.Moduls.Export
                 Task.Delay(500);
             }
             //  сход по времени
-            _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Warning, " _runTestStartProcess()  --  Сход по времени \n"));
+            _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Warning, " _runTestStartProcess()  --  Сход по времени \n"));
             return -1;
         }
         public void Run()
         {
-            TaskRun = Task.Run(async () =>
+            TaskRun = Task.Run( () =>
             {
                 _config.IsRun.IsExport = false;
 
@@ -145,19 +145,19 @@ namespace Convert.Moduls.Export
                 {
                     case 0:
                         //                        Console.WriteLine("Error  - 0");
-                        _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Warning, " OneExport.Run() =>  Error - 0"));
+                        _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Warning, " OneExport.Run() =>  Error - 0"));
                         ErrorRun = 0;
                         return;
 
                     case < 0:
                         //                        Console.WriteLine("Error  -1");
-                        _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Warning, " OneExport.Run() =>  Error - -1"));
+                        _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Warning, " OneExport.Run() =>  Error - -1"));
                         ErrorRun = -1;
                         return;
 
                     case > 0:
                         //                        Console.WriteLine("Все нормально! ");
-                        _ = LoggerManager.AddLoggerAsync(new LoggerEvent(EnumError.Info, " OneExport.Run() =>Start  Ok "));
+                        _ = LoggerManager.AddLoggerTask(new LoggerEvent(EnumError.Info, " OneExport.Run() =>Start  Ok "));
                         break;
                 }
 
@@ -177,7 +177,7 @@ namespace Convert.Moduls.Export
                         _startDateTime = DateTime.Now;
                         continue;
                     }
-                    await Task.Delay(250);
+                    
 
                     if (CompareFilesClf() > 0) continue;
 
