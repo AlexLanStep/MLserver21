@@ -3,7 +3,7 @@
 //  строка запуска c:\mlserver\#common\DLL\lrf_dec.exe -S 20 -L 512 -n -k -v -i C:\MLserver\PS18LIM\log\2020-11-04_18-36-34
 ////  https://docs.microsoft.com/ru-ru/dotnet/core/deploying/single-file  создание публикации
 
-
+//  ~test 
 
 // ReSharper disable once InvalidXmlDocComment
 ///   "out:E:\OutTest"   "rename:\\mlmsrv\MLServer\PTA10SUV"
